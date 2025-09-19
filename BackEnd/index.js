@@ -13,9 +13,25 @@ import { getTransactions, webhook,getTransactionsBySchool,getTransactionStatus} 
 // import authRoutes from "./routes/authRoutes.js"
 
 
+// app.use(cors({
+//     origin: 'http://localhost:5173', // Allow this frontend
+//     credentials: true                // Allow cookies if needed
+// }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://schoolpaymentsystem.netlify.app'
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow this frontend
-    credentials: true                // Allow cookies if needed
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // allow cookies
 }));
 app.use(express.json());
 app.use(cookieParser());
