@@ -42,7 +42,7 @@ This project was built using **React.js (frontend)** and **Node.js + Express + M
 ## Installation & Setup
 
 ### 1 Clone the Repository
-```bash
+---
 git clone https://github.com/your-username/school-payment-system.git
 cd school-payment-system
 
@@ -82,3 +82,10 @@ POST	/api/create-payment	Create a new payment link (requires token)
 GET	/api/transactions?page=1&limit=10	Get paginated transactions (requires token)
 GET	/api/transactions/school/:schoolId	Get transactions by school
 POST	/webhook	Webhook endpoint (payment gateway callback)
+
+---
+
+ ## Screenshots
+
+ 
+
