@@ -1,0 +1,21 @@
+# Ignore node_modules in backend and frontend
+Backend/node_modules/
+Frontend/payment_system_frontend/node_modules/
+
+# Ignore environment files
+Backend/.env
+Frontend/payment_system_frontend/.env
+
+# Ignore logs
+*.log
+
+# Ignore build output from React
+Frontend/payment_system_frontend/build/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/

@@ -1,0 +1,9 @@
+.table-hover tbody tr {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.table-hover tbody tr:hover {
+  transform: scale(1.03); 
+  z-index: 1;
+  cursor: pointer;
+}
