@@ -6,10 +6,10 @@ This project was built using **React.js (frontend)** and **Node.js + Express + M
 
 ---
 
-## 🚀 Features
+## Features
 
 ✅ **User Authentication**
-- Secure **JWT-based login/signup** for school admins.  
+- Secure **JWT-based login** for school admins.  
 - Protected APIs with middleware authentication.  
 
 ✅ **Payment Creation**
@@ -17,7 +17,7 @@ This project was built using **React.js (frontend)** and **Node.js + Express + M
 - Integrates with **Edviron Payment Gateway** (test environment).  
 
 ✅ **Webhook Handling**
-- Automatically updates payment status (success/failure) in the database when the gateway sends callback.  
+-  Updates payment status (success/failure) in the database when the gateway sends callback(Hit via POSTMAN).  
 
 ✅ **Transaction Management**
 - Displays all transactions with student details.  
@@ -37,3 +37,48 @@ This project was built using **React.js (frontend)** and **Node.js + Express + M
 | React.js | Node.js + Express.js | MongoDB (Mongoose) | JWT (Auth) |
 | Axios (API Calls) | Payment Gateway Integration (Edviron) | | Webhook Support |
 | Bootstrap / Custom CSS | CORS, dotenv | | Render (Deployment) |
+
+
+## Installation & Setup
+
+### 1 Clone the Repository
+```bash
+git clone https://github.com/your-username/school-payment-system.git
+cd school-payment-system
+
+
+2️ Setup Backend
+cd backend
+npm install
+
+
+Create a .env file in the backend folder:
+
+PORT=5000
+MONGO_URI=your_mongodb_url
+JWT_SECRET=your_jwt_secret
+PAYMENT_API_KEY=your_payment_gateway_api_key
+PG_KEY=your_payment_gateway_jwt_sign_key
+BACKEND_URL=https://your-backend-deployed-url
+
+
+Run the backend:
+
+npm run dev
+
+3️ Setup Frontend
+cd ../frontend
+npm install
+npm run dev
+
+
+Open the app at http://localhost:5173
+
+🔗 API Endpoints
+Method	Endpoint	Description
+POST	/api/signup	Register a new admin user
+POST	/api/signin	Login admin & get JWT token
+POST	/api/create-payment	Create a new payment link (requires token)
+GET	/api/transactions?page=1&limit=10	Get paginated transactions (requires token)
+GET	/api/transactions/school/:schoolId	Get transactions by school
+POST	/webhook	Webhook endpoint (payment gateway callback)
