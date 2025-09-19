@@ -10,13 +10,8 @@ import { checkAuhentication } from "./middleware/auth_middleware.js";
 import { createPayment } from "./controllers/paymentController.js";
 import { getTransactions, webhook,getTransactionsBySchool,getTransactionStatus} from "./controllers/transactionController.js";
 
-// import authRoutes from "./routes/authRoutes.js"
 
-
-// app.use(cors({
-//     origin: 'http://localhost:5173', // Allow this frontend
-//     credentials: true                // Allow cookies if needed
-// }));
+// CORS
 const allowedOrigins = [
   'http://localhost:5173',
   'https://schoolpaymentsystem.netlify.app'
@@ -33,26 +28,22 @@ app.use(cors({
   },
   credentials: true // allow cookies
 }));
+// when Frontend send data in json then we have to parse it 
 app.use(express.json());
+// parse the cookie
 app.use(cookieParser());
 
 
 app.post("/api/signup",signup);
 app.post("/api/signin",signin);
 app.post("/api/create-payment", checkAuhentication, createPayment);
-// Webhook should NOT require auth (gateway can't send token)
+// Webhook is the part of payment gateway
 app.post("/webhook", webhook);
 // Protect transaction listing with JWT
 app.get("/api/transactions", checkAuhentication, getTransactions);
 app.get("/api/transactions/school/:schoolId", checkAuhentication, getTransactionsBySchool);
 app.get("/api/transaction_status/:customOrderId", checkAuhentication, getTransactionStatus);
-app.get("/",checkAuhentication,(req,res)=>{
-    res.send("Hiii")
-})
-
-
-
-
+// server log
 const port=process.env.PORT || 5000;
 app.listen(port,(error)=>{
     if(error){

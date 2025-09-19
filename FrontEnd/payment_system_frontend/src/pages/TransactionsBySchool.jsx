@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const TransactionsBySchool = () => {
 
-     const [schoolId, setSchoolId] = useState("");
+  const [schoolId, setSchoolId] = useState("");
   const [transactions, setTransactions] = useState([]);
   // track if search clicked
   const [searched, setSearched] = useState(false); 
@@ -67,7 +67,7 @@ const TransactionsBySchool = () => {
             {transactions.map((tx) => (
               <tr key={tx.collect_id}>
                 <td>{tx.collect_id}</td>
-                <td>{tx.order_amount}</td>
+                <td>{`₹${tx.order_amount}.00`}</td>
                 <td>{tx.status}</td>
               </tr>
             ))}

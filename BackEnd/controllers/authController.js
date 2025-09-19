@@ -2,11 +2,11 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
 export const signup=async (req,res)=>{
-
+// frontend will send email and password. B.E will extract those from req.body
     const {email,password}=req.body;
     const existingUser=await User.findOne({email});
   try {
-
+// 1st let's check user with provided email exist or not
       if(existingUser){
         res.status(409).json({message:"Email id already registered... Please signIn"})
     }else{
@@ -23,16 +23,16 @@ export const signup=async (req,res)=>{
 
 
 export const signin=async (req,res)=>{
-
+// frontend will send email and password. B.E will extract those from req.body
     const {email,password}=req.body;
-
+// 1st let's check user with provided email exist or not
     const existingUser=await User.findOne({email});
        if(!existingUser){
         return res.status(404).json({message:"User with this emial is not found!"})
     }
-
+// if user exist then match the password.
     if(password===existingUser.password){
-    // Generate jwt and send to frontend cookie
+// email and password both matched so let's generate jwt and send to frontend cookie
     const token= jwt.sign({email:existingUser.email,password:existingUser.password},"sanauaransari",{expiresIn:"6h"});
     res.cookie('token',token);
     // console.log(token,"----token consoled at signin")

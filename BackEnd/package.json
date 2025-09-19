@@ -4,7 +4,8 @@
   "description": "This is a backend of the assignment",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js", 
+ 
+    "start":"node index.js",
     "dev": "nodemon index.js" ,
     "test": "echo \"Error: no test specified\" && exit 1"
   },

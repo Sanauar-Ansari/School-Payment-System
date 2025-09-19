@@ -9,15 +9,16 @@ export const createPayment = async (req, res) => {
   try {
     const { school_id, student_info, amount } = req.body;
 
-    // step 1- Create order in DB
+    // 1st Create order in DB (every payment initiation creates a new order in DB)
     const order = await Order.create({
       school_id,
       student_info,
       gateway_name: "Edviron"
     });
 
-    // step 2️- Generate JWT sign using PG Key
-    const callbackUrl = `${process.env.FRONTEND_URL}/payment-callback`;
+    // 2️nd Use correct webhook route
+    const callbackUrl = `${process.env.BACKEND_URL}/webhook`;
+    // console.log("Callback URL:", callbackUrl);
     const payload = {
       school_id,
       amount: amount.toString(),
@@ -26,7 +27,7 @@ export const createPayment = async (req, res) => {
 
     const sign = jwt.sign(payload, process.env.PG_KEY);
 
-    // step 3️- Call Payment Gateway API
+    // 3️rd Call payment gateway API
     const response = await axios.post(
       "https://dev-vanilla.edviron.com/erp/create-collect-request",
       {
@@ -43,12 +44,9 @@ export const createPayment = async (req, res) => {
       }
     );
 
-
-    // console.log(response.data)
-    // 4️⃣ Get gateway response
     const { collect_request_id, collect_request_url } = response.data;
 
-    // 5️⃣ (Optional) Store order status record (initially pending)
+    // 4️th  Save order status as pending. once the payment confirmed by webhook then status will be changed. 
     await OrderStatus.create({
       collect_id: order._id,
       order_amount: amount,
@@ -56,7 +54,7 @@ export const createPayment = async (req, res) => {
       payment_message: "Waiting for payment",
     });
 
-    // 6️⃣ Send payment link back to frontend
+    // 5️th Send payment link to the frontend
     res.json({
       success: true,
       order_id: order._id,
@@ -73,3 +71,6 @@ export const createPayment = async (req, res) => {
     });
   }
 };
+
+
+
