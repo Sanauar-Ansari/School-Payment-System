@@ -30,7 +30,7 @@ const TransactionStatus = () => {
         />
         <button className="btn btn-primary pointer-btn" onClick={checkStatus} disabled={!orderId}>Check</button>
       </div>
-      {status && <div className="alert alert-info">Status: {`${status}, Amount:  ${statusAmount}/-`}</div>}
+      {status && <div className="alert alert-info">Status: {`${status}, Amount: ₹${statusAmount}.00/-`}</div>}
     </div>
   )
 }

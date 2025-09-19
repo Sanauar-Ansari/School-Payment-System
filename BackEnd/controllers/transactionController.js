@@ -3,7 +3,6 @@ import OrderStatus from "../models/OrderStatus.js"
 export const webhook = async (req, res) => {
   try {
     const data = req.body.order_info;
-
     // Update or insert OrderStatus record
     await OrderStatus.findOneAndUpdate(
       { collect_id: data.order_id },
@@ -20,8 +19,7 @@ export const webhook = async (req, res) => {
       },
       { upsert: true }
     );
-
-    console.log("Webhook received:", data);
+    // console.log("Webhook received:", data);
 
     res.json({ success: true, message: "Webhook processed" });
   } catch (error) {
@@ -32,14 +30,16 @@ export const webhook = async (req, res) => {
 
 
 
+
+// this is to get transaction depend on per page.
 export const getTransactions = async (req, res) => {
   try {
-    // ✅ Get page & limit from query params
+    //  Get page & limit from query params
     let { page = 1, limit = 10 } = req.query;
     page = parseInt(page);
     limit = parseInt(limit);
 
-    // ✅ Count total transactions
+    // Count total transactions
     const totalRecords = await OrderStatus.countDocuments();
 
     const transactions = await OrderStatus.aggregate([
@@ -61,36 +61,7 @@ export const getTransactions = async (req, res) => {
 };
 
 
-// export const getTransactions = async (req, res) => {
-//   try {
-//     // ✅ Get page & limit from query params
-//     let { page = 1, limit = 10 } = req.query;
-//     page = parseInt(page);
-//     limit = parseInt(limit);
-
-//     // ✅ Count total transactions
-//     const totalRecords = await OrderStatus.countDocuments();
-
-//     const transactions = await OrderStatus.aggregate([
-//       { $lookup: { from: "orders", localField: "collect_id", foreignField: "_id", as: "order_details" } },
-//       { $unwind: "$order_details" },
-//       { $skip: (page - 1) * limit },
-//       { $limit: limit }
-//     ]);
-
-//     res.json({
-//       transactions,
-//       totalPages: Math.ceil(totalRecords / limit),
-//       totalRecords,
-//       currentPage: page
-//     });
-//   } catch (error) {
-//     res.status(500).json({ success: false, error: error.message });
-//   }
-// };
-
-
-
+// transaction list depends on school_id
 export const getTransactionsBySchool = async (req, res) => {
   try {
     const { schoolId } = req.params;
@@ -130,10 +101,7 @@ export const getTransactionsBySchool = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
-
-
-
+// transaction list depends on order_id
 export const getTransactionStatus = async (req, res) => {
   try {
     const { customOrderId } = req.params;

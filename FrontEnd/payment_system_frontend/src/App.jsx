@@ -19,7 +19,6 @@ function App() {
 
     }
        <div className="container mt-4">
-        {/* <h1 className="text-center mb-4">School Payments Dashboard</h1> */}
         <Routes >
             {
           !token && (
@@ -30,8 +29,6 @@ function App() {
             </>
           )
         }
-
-
         <Route element={<ProtectedRoute/>}>
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/" element={<Transactions/>} />
