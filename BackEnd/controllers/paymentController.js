@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import Order from "../models/order.js";
+import Order from "../models/Order.js";
 import OrderStatus from "../models/OrderStatus.js"
 
 export const createPayment = async (req, res) => {
