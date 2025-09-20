@@ -1,5 +1,5 @@
-# Live URL
-https://schoolpaymentsystem.netlify.app/
+# Live URL- https://schoolpaymentsystem.netlify.app/
+
 
 
 # School Payment Management System
