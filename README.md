@@ -1,3 +1,7 @@
+# Live URL
+https://schoolpaymentsystem.netlify.app/
+
+
 # School Payment Management System
 
 A full-stack **School Payment Management System** that allows schools to create payment links for students, collect payments securely via a payment gateway (Edviron), and view transaction history with **pagination support**.  
