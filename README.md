@@ -8,29 +8,29 @@ This project was built using **React.js (frontend)** and **Node.js + Express + M
 
 ## Features
 
-✅ **User Authentication**
+1. **User Authentication**
 - Secure **JWT-based login** for school admins.  
 - Protected APIs with middleware authentication.  
 
-✅ **Payment Creation**
+2. **Payment Creation**
 - Generate payment links for students by entering their details (name, email, ID, amount).  
 - Integrates with **Edviron Payment Gateway** (test environment).  
 
-✅ **Webhook Handling**
+3. **Webhook Handling**
 -  Updates payment status (success/failure) in the database when the gateway sends callback(Hit via POSTMAN).  
 
-✅ **Transaction Management**
+4. **Transaction Management**
 - Displays all transactions with student details.  
 - **Pagination support** (`?page=1&limit=10`).  
 - Allows filtering transactions by **School ID**.
 
-✅ **Responsive UI**
+5. **Responsive UI**
 - Built with React + Bootstrap for a clean and simple UI.  
 - Includes success messages, alerts, and hover animations for better UX.  
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | **Frontend** | **Backend** | **Database** | **Other** |
 |-------------|-------------|-------------|-----------|
@@ -74,7 +74,7 @@ npm run dev
 
 Open the app at http://localhost:5173
 
-🔗 API Endpoints
+ API Endpoints
 Method	Endpoint	Description
 POST	/api/signup	Register a new admin user
 POST	/api/signin	Login admin & get JWT token
